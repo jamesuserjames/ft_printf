@@ -4,8 +4,15 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs
 
-SRCS = ft_printf.c ft_format.c ft_putchar_ret.c ft_putstr_ret.c \
-       ft_putnbr_ret.c ft_putunsigned_ret.c ft_puthex_ret.c ft_putptr_ret.c
+SRCS = ft_printf.c \
+       srcs/ft_format.c \
+       srcs/ft_putchar_ret.c \
+       srcs/ft_putstr_ret.c \
+       srcs/ft_putnbr_ret.c \
+       srcs/ft_putunsigned_ret.c \
+       srcs/ft_puthex_ret.c \
+       srcs/ft_putptr_ret.c
+
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

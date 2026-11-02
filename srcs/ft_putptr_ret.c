@@ -2,7 +2,23 @@
 
 #include "../ft_printf.h"
 
-static int	ft_print_address(unsigned long n);
+static int	ft_print_address(unsigned long n)
+{
+	char	c;
+	int		count;
+
+	count = 0;
+	if (n >= 16)
+	{
+		count = ft_print_address(n / 16);
+		if (count == -1)
+			return (-1);
+	}
+	c = "0123456789abcdef"[n % 16];
+	if (write(1, &c, 1) != 1)
+		return (-1);
+	return (count + 1);
+}
 
 int	ft_putptr_ret(void *ptr)
 {
@@ -26,95 +42,44 @@ int	ft_putptr_ret(void *ptr)
 	return (count + ret);
 }
 
-static int	ft_print_address(unsigned long n)
-{
-	char	c;
-	int		count;
+// int	main(void)
+// {
+// 	int	n;
+// 	int	ret;
 
-	count = 0;
-	if (n >= 16)
-	{
-		count = ft_print_address(n / 16);
-		if (count == -1)
-			return (-1);
-	}
-	c = "0123456789abcdef"[n % 16];
-	if (write(1, &c, 1) != 1)
-		return (-1);
-	return (count + 1);
-}
+// 	n = 42;
+// 	printf("Test 1: Integer address\n");
+// 	printf("Expected: %p\nActual:   ", (void *)&n);
+// 	fflush(stdout);
+// 	ret = ft_putptr_ret(&n);
+// 	printf("\nReturn: %d\n\n", ret);
 
-int	main(void)
-{
-	int	n;
-	int	ret;
+// 	printf("Test 2: NULL\nExpected: (nil)\nActual:   ");
+// 	fflush(stdout);
+// 	ret = ft_putptr_ret(NULL);
+// 	printf("\nReturn: %d (expected: 5)\n\n", ret);
 
-	n = 42;
-	printf("Test 1: Integer address\n");
-	printf("Expected: %p\nActual:   ", (void *)&n);
-	fflush(stdout);
-	ret = ft_putptr_ret(&n);
-	printf("\nReturn: %d\n\n", ret);
+// 	printf("Test 3: Small address\nExpected: 0x1\nActual:   ");
+// 	fflush(stdout);
+// 	ret = ft_putptr_ret((void *)1);
+// 	printf("\nReturn: %d (expected: 3)\n\n", ret);
 
-	printf("Test 2: NULL\nExpected: (nil)\nActual:   ");
-	fflush(stdout);
-	ret = ft_putptr_ret(NULL);
-	printf("\nReturn: %d (expected: 5)\n\n", ret);
+// 	printf("Test 4: Hex address\nExpected: 0xff\nActual:   ");
+// 	fflush(stdout);
+// 	ret = ft_putptr_ret((void *)255);
+// 	printf("\nReturn: %d (expected: 4)\n\n", ret);
 
-	printf("Test 3: Small address\nExpected: 0x1\nActual:   ");
-	fflush(stdout);
-	ret = ft_putptr_ret((void *)1);
-	printf("\nReturn: %d (expected: 3)\n\n", ret);
-
-	printf("Test 4: Hex address\nExpected: 0xff\nActual:   ");
-	fflush(stdout);
-	ret = ft_putptr_ret((void *)255);
-	printf("\nReturn: %d (expected: 4)\n\n", ret);
-
-	printf("Test 5: Large address\nExpected: 0xabcdef123456\nActual:   ");
-	fflush(stdout);
-	ret = ft_putptr_ret((void *)0xabcdef123456UL);
-	printf("\nReturn: %d (expected: 14)\n", ret);
-	return (0);
-}
+// 	printf("Test 5: Large address\nExpected: 0xabcdef123456\nActual:   ");
+// 	fflush(stdout);
+// 	ret = ft_putptr_ret((void *)0xabcdef123456UL);
+// 	printf("\nReturn: %d (expected: 14)\n", ret);
+// 	return (0);
+// }
 
 /*
-EXSPEXTED OUTPUT:
-Test 1: Integer address
-Expected: 0x16f123abc
-Actual:   0x16f123abc
-Return: 11
-
-Test 2: NULL
-Expected: (nil)
-Actual:   (nil)
-Return: 5 (expected: 5)
-
-Test 3: Small address
-Expected: 0x1
-Actual:   0x1
-Return: 3 (expected: 3)
-
-Test 4: Hex address
-Expected: 0xff
-Actual:   0xff
-Return: 4 (expected: 4)
-
-Test 5: Large address
-Expected: 0xabcdef123456
-Actual:   0xabcdef123456
-Return: 14 (expected: 14)
-
 DESCRIPTION:
 Print a pointer address (%%p), typically as 0x followed by lowercase hex.
 
 RETURN:
 Number of characters written, or -1 on write error.
-
-TODO:
-1. Check your project's required representation for NULL pointers.
-2. Print the prefix and hexadecimal digits of the address.
-3. Use unsigned long or uintptr_t (if allowed) to hold the address;
-   unsigned int may truncate pointers on 64-bit systems.
-4. Add up all characters written, including the prefix.
 */

@@ -20,13 +20,15 @@ int	ft_putunsigned_ret(unsigned int n)
 	return (count + 1);
 }
 
-int main(void)
-{
-	ft_putunsigned_ret(42);
-	ft_putunsigned_ret(0);
-	ft_putunsigned_ret(4294967295U);
-	return 0;
-}
+// int main(void)
+// {
+// 	ft_putunsigned_ret(42);
+// 	write(1, "\n", 1);
+// 	ft_putunsigned_ret(0);
+// 	write(1, "\n", 1);
+// 	ft_putunsigned_ret(4294967295U);
+// 	return 0;
+// }
 
 /*
 DESCRIPTION:
@@ -34,8 +36,4 @@ Print an unsigned decimal integer (%%u).
 
 RETURN:
 Number of characters written, or -1 on write error.
-
-TODO:
-Print each base-10 digit in order. Handle 0 and UINT_MAX.
-You can use recursion, or a small local character buffer.
 */

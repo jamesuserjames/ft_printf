@@ -35,20 +35,57 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
+#include <stdio.h>
+#include <limits.h>
+
+int	main(void)
+{
+	int		n;
+	int		ret;
+	int		ret2;
+	char	*str;
+	void	*ptr;
+
+	n = 42;
+	str = "hello world";
+	ptr = &n;
+
+	ft_printf("char: %c\n", 'A');
+	printf("char: %c\n", 'A');
+
+	ft_printf("string: %s\n", str);
+	printf("string: %s\n", str);
+
+	ft_printf("pointer: %p\n", ptr);
+	printf("pointer: %p\n", ptr);
+
+	ft_printf("numbers: %d %i\n", INT_MIN, INT_MAX);
+	printf("numbers: %d %i\n", INT_MIN, INT_MAX);
+
+	ft_printf("unsigned: %u\n", UINT_MAX);
+	printf("unsigned: %u\n", UINT_MAX);
+
+	ft_printf("hex: %x %X\n", 255, 255);
+	printf("hex: %x %X\n", 255, 255);
+
+	ft_printf("percent: %%\n");
+	printf("percent: %%\n");
+
+	ret = ft_printf("test %s %d\n", "number", n);
+	ret2 = printf("test %s %d\n", "number", n);
+
+	printf("return ft_printf: %d\n", ret);
+	printf("return printf: %d\n", ret2);
+	return (0);
+}
+
 /*
-DESCRIPTION:
-Read the format string and print plain text or formatted arguments.
+make
+cc -Wall -Wextra -Werror libftprintf.a -o test.out
+./test.out
 
-RETURN:
-Total number of bytes printed, or -1 on write error.
-
-TODO:
-1. Initialize va_list using va_start.
-2. Walk through format with an index.
-3. For '%' followed by a conversion, call ft_format.
-4. Otherwise print the literal character with ft_putchar_ret.
-5. Check each helper's result BEFORE adding it to the count.
-6. Always call va_end after va_start, even on write errors.
-7. Return the total or -1.
-NOTE: Follow your subject's behavior for trailing '%' and NULL format.
+make fclean
+make
+cc -Wall -Wextra -Werror libftprintf.a -o test.out
+./test.out
 */

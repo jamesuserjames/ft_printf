@@ -28,10 +28,4 @@ Supported: c, s, p, d, i, u, x, X, %.
 
 RETURN:
 Number of bytes printed, or -1 on write error.
-
-TODO:
-Use if statements (or else if) and va_arg(args, TYPE).
-Types: c=int, s=char *, p=void *, d/i=int, u/x/X=unsigned int.
-A literal percent sign consumes no variadic argument.
-Follow your subject's rules for unsupported formats.
 */
