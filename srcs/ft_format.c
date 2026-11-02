@@ -2,20 +2,20 @@
 
 #include "../ft_printf.h"
 
-int	ft_format(char c, va_list args)
+int	ft_format(char c, va_list *args)
 {
 	if (c == 'c')
-		return (ft_putchar_ret(va_arg(args, int)));
+		return (ft_putchar_ret(va_arg(*args, int)));
 	if (c == 's')
-		return (ft_putstr_ret(va_arg(args, char *)));
+		return (ft_putstr_ret(va_arg(*args, char *)));
 	if (c == 'p')
-		return (ft_putptr_ret(va_arg(args, void *)));
+		return (ft_putptr_ret(va_arg(*args, void *)));
 	if (c == 'd' || c == 'i')
-		return (ft_putnbr_ret(va_arg(args, int)));
+		return (ft_putnbr_ret(va_arg(*args, int)));
 	if (c == 'u')
-		return (ft_putunsigned_ret(va_arg(args, unsigned int)));
+		return (ft_putunsigned_ret(va_arg(*args, unsigned int)));
 	if (c == 'x' || c == 'X')
-		return (ft_puthex_ret(va_arg(args, unsigned int), c));
+		return (ft_puthex_ret(va_arg(*args, unsigned int), c));
 	if (c == '%')
 		return (ft_putchar_ret('%'));
 	return (-1);

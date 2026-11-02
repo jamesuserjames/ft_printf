@@ -2,7 +2,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_process(const char *format, va_list args)
+static int	ft_process(const char *format, va_list *args)
 {
 	int	i;
 	int	count;
@@ -30,13 +30,10 @@ int	ft_printf(const char *format, ...)
 	int		count;
 
 	va_start(args, format);
-	count = ft_process(format, args);
+	count = ft_process(format, &args);
 	va_end(args);
 	return (count);
 }
-
-#include <stdio.h>
-#include <limits.h>
 
 int	main(void)
 {

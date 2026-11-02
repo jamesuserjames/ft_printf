@@ -10,7 +10,7 @@ int ft_puthex_ret(unsigned int n, char format)
 	
 	count = 0;
 	if (format >= 'a' && format <= 'z')
-		base = "0123456789abcdefg";
+		base = "0123456789abcdef";
 	else if (format >= 'A' && format <= 'Z')
 		base = "0123456789ABCDEF";
 	if (n >= 16)
