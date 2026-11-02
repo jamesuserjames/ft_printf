@@ -3,11 +3,9 @@
 #include "../ft_printf.h"
 
 // ret = short for return
-
 static int	ft_print_digits(long n)
 {
 	int		count;
-	int		ret;
 	char	c;
 
 	count = 0;
@@ -18,10 +16,9 @@ static int	ft_print_digits(long n)
 			return (-1);
 	}
 	c = (n % 10) + '0';
-	ret = write(1, &c, 1);
-	if (ret == -1)
+	if (write(1, &c, 1) != 1)
 		return (-1);
-	return (count + ret);
+	return (count + 1);
 }
 
 int ft_putnbr_ret(int n)
@@ -34,10 +31,9 @@ int ft_putnbr_ret(int n)
 	count = 0;
 	if (l < 0)
 	{
-		ret = write(1, "-", 1);
-		if (ret == -1)
+		if (write(1, "-", 1) != 1)
 			return (-1);
-		count = ret;
+		count = 1;
 		l = -l;
 	}
 	ret = ft_print_digits(l);
@@ -79,4 +75,34 @@ TODO:
 3. Count the minus sign and every digit.
 TIP: Convert n to long before negating it, or use unsigned arithmetic.
 TIP: A static helper may make recursion and error handling easier.
+*/
+
+// old version:
+/*
+int	ft_putnbr_ret(int n)
+{
+	long	l;
+	int		count;
+	char	c;
+
+	l = n;
+	count = 0;
+	if (l < 0)
+	{
+		if (write(1, "-", 1) != 1)
+			return (-1);
+		l = -l;
+		count = 1;
+	}
+	if (l >= 10)
+	{
+		count = ft_putnbr_ret(l / 10);
+		if (count == -1)
+			return (-1);
+	}
+	c = (l % 10) + '0';
+	if (write(1, &c, 1) != 1)
+		return (-1);
+	return (count + 1);
+}
 */

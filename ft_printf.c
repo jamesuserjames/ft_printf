@@ -2,9 +2,37 @@
 
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+static int	ft_process(const char *format, va_list args)
 {
-    
+	int	i;
+	int	count;
+	int	ret;
+
+	i = 0;
+	count = 0;
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1])
+			ret = ft_format(format[++i], args);
+		else
+			ret = ft_putchar_ret(format[i]);
+		if (ret == -1)
+			return (-1);
+		count += ret;
+		i++;
+	}
+	return (count);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		count;
+
+	va_start(args, format);
+	count = ft_process(format, args);
+	va_end(args);
+	return (count);
 }
 
 /*

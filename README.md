@@ -24,7 +24,7 @@ The files compile, but tests will fail until you implement the functions.
     3. `ft_putnbr_ret`
     4. `ft_putunsigned_ret`
     5. `ft_puthex_ret`
-6. `ft_putptr_ret`
+    6. `ft_putptr_ret`
 7. `ft_format`
 8. `ft_printf`
 
