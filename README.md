@@ -1,68 +1,91 @@
-# ft_printf — build-it-yourself practice
+*This project has been created as part of the 42 curriculum by .*
 
-This is a **scaffold, not a solution**. Every function has a TODO placeholder.
-The files compile, but tests will fail until you implement the functions.
+# ft_printf
 
-## Files
+## Description
 
-- `ft_putchar_ret.c`: print one character; return bytes written.
-- `ft_putstr_ret.c`: print a string, including NULL handling.
-- `ft_putnbr_ret.c`: signed decimal, including INT_MIN.
-- `ft_putunsigned_ret.c`: unsigned decimal.
-- `ft_puthex_ret.c`: lowercase/uppercase hexadecimal.
-- `ft_putptr_ret.c`: pointer address.
-- `ft_format.c`: dispatch `%c %s %p %d %i %u %x %X %%`.
-- `ft_printf.c`: parse format, handle va_list, count output.
-- `ft_printf.h`: all prototypes and includes.
-- `Makefile`: builds `libftprintf.a`.
-- `tests/`: independent learning tests, NOT files to submit.
+A C library recreating the mandatory behavior of `printf` for the following supported specifiers:
 
-## Suggested learning order
+- `%c` — Prints a single character.
+- `%s` — Prints a string.
+- `%p` — Prints a pointer address.
+- `%d` / `%i` — Prints a signed integer.
+- `%u` — Prints an unsigned integer.
+- `%x` — Prints a lowercase hexadecimal number.
+- `%X` — Prints an uppercase hexadecimal number.
+- `%%` — Prints a percent sign.
 
-    1. `ft_putchar_ret`
-    2. `ft_putstr_ret`
-    3. `ft_putnbr_ret`
-    4. `ft_putunsigned_ret`
-    5. `ft_puthex_ret`
-    6. `ft_putptr_ret`
-7. `ft_format`
-8. `ft_printf`
+## Instructions
 
-## How to run
+### 1. Compile the library
 
-```sh
-./run_tests.sh char
-./run_tests.sh str
-./run_tests.sh nbr
-./run_tests.sh unsigned
-./run_tests.sh hex
-./run_tests.sh ptr
-./run_tests.sh all
-./run_tests.sh printf   # after completing dispatcher + main
+Run:
+
+```bash
 make
+```
+
+This creates `libftprintf.a`.
+
+### 2. Compile the test program
+
+```bash
+cc -Wall -Wextra -Werror main.c libftprintf.a -o test.out
+```
+
+### 3. Run the tests
+
+```bash
+./test.out
+```
+
+### 4. Clean up
+
+Remove object files:
+
+```bash
 make clean
+```
+
+Remove object files and the library:
+
+```bash
 make fclean
+```
+
+Recompile everything:
+
+```bash
 make re
 ```
 
-Each helper test compiles the helper stubs but runs only the selected tests.
-`printf` mode builds the complete library first. Tests compare output and counts;
-they are not an exhaustive automatic correctness checker.
+## Algorithm and Data Structures
 
-## Evaluation checklist
+The `ft_printf()` function uses `va_list` to handle variable arguments.
 
-- [ ] Explain `write(1, ..., ...)` and its return value.
-- [ ] Explain why printf helpers return `int` instead of `void`.
-- [ ] Explain how `va_start`, `va_arg`, and `va_end` work.
-- [ ] Explain why `%c` reads an `int` from `va_arg`.
-- [ ] Explain how the main loop handles `%%`.
-- [ ] Test zero, negatives, INT_MIN, UINT_MAX, hex case, and pointers.
-- [ ] Handle write errors and (ideally) short writes.
-- [ ] Verify your subject's NULL-pointer and malformed-format rules.
-- [ ] Run norminette on submission files (tests are not Norm-compliant).
-- [ ] Verify `make`, `make clean`, `make fclean`, and `make re`.
-- [ ] Verify archive is named `libftprintf.a`.
+It loops through the format string and prints normal characters directly. When it encounters `%`, it calls `ft_format()` to determine the correct conversion.
 
-**Note:** The TODO bodies are intentionally not finished. The test sources
-are deliberately compact and may use forbidden functions; keep them outside
-your submission. Read your current Codam subject for the exact rules.
+Each printing function returns the number of characters written, or `-1` if writing fails.
+
+Integers are printed recursively, starting with the most significant digit.
+
+No dynamic memory allocation or output buffer is needed.
+
+## Resources
+
+- `man 3 printf`
+- `man 3 stdarg`
+- `man 2 write`
+- Official ft_printf subject (version 12.1)
+
+### AI Usage
+
+AI was used to review the Makefile and header, improve the README, and help create test cases.
+
+## Testing
+
+The `main.c` file compares `ft_printf()` with the original `printf()`.
+
+Tests include all mandatory conversions, integer limits, pointers, strings, hexadecimal values, and return values.
+
+The individual source files also contain test functions used during development.
