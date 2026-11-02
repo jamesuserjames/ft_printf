@@ -30,7 +30,7 @@ This creates `libftprintf.a`.
 ### 2. Compile the test program
 
 ```bash
-cc -Wall -Wextra -Werror main.c libftprintf.a -o test.out
+cc -Wall -Wextra -Werror libftprintf.a -o test.out
 ```
 
 ### 3. Run the tests
@@ -58,6 +58,9 @@ Recompile everything:
 ```bash
 make re
 ```
+
+
+
 
 ## Algorithm and Data Structures
 
